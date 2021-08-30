@@ -101,24 +101,21 @@ def calcula_assinatura(texto):
 
 def avalia_textos(textos, ass_cp):
     '''IMPLEMENTAR. Essa funcao recebe uma lista de textos e uma assinatura ass_cp e deve devolver o numero (1 a n) do texto com maior probabilidade de ter sido infectado por COH-PIAH.'''
-    i = 0
+    grau = compara_assinatura(calcula_assinatura(textos[0]), ass_cp)
+    i = 1
     t = 1
-    infectado = 0
-    grau = compara_assinatura(calcula_assinatura(textos[i]), ass_cp)
     while i < len(textos):
-        i += 1
-        infectado = grau
-        infectado = compara_assinatura(calcula_assinatura(textos[i]), ass_cp)
-        if infectado < grau:
-            grau = infectado
+        if compara_assinatura(calcula_assinatura(textos[i]), ass_cp) < grau:
+            grau = compara_assinatura(calcula_assinatura(textos[i]), ass_cp)
             t += 1
+        i += 1
 
     return t
 
 def main():
     '''Inicia o programa'''
-    textos = le_textos()
     ass_cp = le_assinatura()
+    textos = le_textos()
     for texto in textos:
         avalia_textos(textos, ass_cp)
 
